@@ -1,0 +1,12 @@
+i=15
+while true
+do sudo mkdir /var/lib/tor/hidden_service/$i/
+sudo chmod 700 /var/lib/tor/hidden_service/$i/
+chown -R debian-tor:debian-tor /var/lib/tor/hidden_service/$i/
+echo -e "HiddenServiceDir /var/lib/tor/hidden_service/$i/\nHiddenServicePort 80 127.0.0.1:8080" > /etc/tor/torrc
+cat /etc/tor/torrc ;sudo service tor restart
+sleep 1
+echo $i 
+i=$(($i+1))
+done
+
